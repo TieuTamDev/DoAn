@@ -6,19 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SearchEvent;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.doan.fragment.HomeFragment;
-import com.example.doan.fragment.LoginFragment;
 import com.example.doan.fragment.SettingFragment;
+import com.example.doan.ui.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView mnBottom;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mnHome:
                         loadFragment(new HomeFragment());
                         return  true;
-                    case R.id.mnLogin:
-                        loadFragment(new LoginFragment());
-                        return true;
                     case R.id.mnSetting:
                         loadFragment(new SettingFragment());
+                        return true;
+                    case R.id.mnLogin:
+                        showActivity(item.getTitle().toString());
                         return true;
                     case R.id.mnSearch:
                         loadFragment(new SettingFragment());
@@ -60,6 +64,19 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInf = getMenuInflater();
+        menuInf.inflate(R.menu.bottomnav, menu);
+        return true;
+    }
+
+
+    void showActivity(String nameMn){
+        Intent i= new Intent(MainActivity.this,LoginActivity.class);
+        i.putExtra("menu", nameMn);
+        startActivity(i);
+    }
     void loadFragment(Fragment fmNew)
     {
         FragmentTransaction fmTran = getSupportFragmentManager().beginTransaction();
@@ -67,4 +84,5 @@ public class MainActivity extends AppCompatActivity {
         fmTran.addToBackStack(null);
         fmTran.commit();
     }
+
 }

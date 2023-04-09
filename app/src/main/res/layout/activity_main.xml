@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:background="#313866"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/navMenu"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/navMenu">
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
